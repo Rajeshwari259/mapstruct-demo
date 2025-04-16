@@ -26,7 +26,7 @@ public class UserService {
     }
 
     public List<UserDTO> getAllUsers() {
-        List<User> userList = userRepository.findAll(); // Get all users from DB
-        return userMapper.toDTOList(userList); // Convert to List<UserDTO> using MapStruct
+        List<User> userList = userRepository.findAll(); 
+        return userMapper.toDTOList(userList); 
     }
 }
