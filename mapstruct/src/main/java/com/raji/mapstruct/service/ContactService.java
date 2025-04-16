@@ -19,24 +19,19 @@ public class ContactService {
     @Autowired
     private ContactMapper contactMapper;
     public Contact saveContact(ContactDTO contactDTO) {
-        // Use MapStruct to convert DTO → Entity
         Contact contact = contactMapper.toEntity(contactDTO);
-
-        // Optional: log to confirm mapping (good during development)
         System.out.println("Mapped Contact: " + contact);
-
-        // Save to DB
         return contactRepository.save(contact);
     }
 
 //    public Contact saveContact(ContactDTO contactDTO) {
-//        // ✅ Confirm values are received
+
 //        System.out.println("DTO first name: " + contactDTO.getFirstName());
 //        System.out.println("DTO last name: " + contactDTO.getLastName());
 //        System.out.println("DTO email: " + contactDTO.getEmail());
 //        System.out.println("DTO phone: " + contactDTO.getPhone());
 //
-//        // ✅ Build the Contact object manually (bypassing MapStruct for now)
+
 //        Contact contact = Contact.builder()
 //                .firstName(contactDTO.getFirstName())
 //                .lastName(contactDTO.getLastName())
@@ -44,16 +39,13 @@ public class ContactService {
 //                .phone(contactDTO.getPhone())
 //                .build();
 //
-//        // ✅ Save to DB
 //        return contactRepository.save(contact);
 //    }
 
 
     public ContactDTO getContactById(Long id) {
 
-        // Find the Contact entity by ID
         Optional<Contact> contactOptional = contactRepository.findById(id);
-        // If found, convert it to ContactDTO using the mapper
         if (contactOptional.isPresent()) {
             return contactMapper.toDTO(contactOptional.get());
         } else {
